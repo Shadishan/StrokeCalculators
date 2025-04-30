@@ -408,6 +408,21 @@ document.getElementById('close').onclick=()=>modal.classList.remove('show');
 document.getElementById('prev').onclick=()=>showSlide(idx-1);
 document.getElementById('next').onclick=()=>showSlide(idx+1);
 modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('show');});
+
+/* onclick handler */
+document.getElementById('calcNIHSS').onclick = () => {
+    calcNIHSS();
+    buildSummary('nihss');
+ };
+
+/*test console */
+document.getElementById('calcNIHSS').onclick = () => {
+  console.log("NIHSS calculate clicked");
+  calcNIHSS();
+  buildSummary('nihss');
+};
+
+	
 </script>
 </body>
 </html>
