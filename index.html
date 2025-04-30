@@ -82,7 +82,7 @@ section.active{display:block;animation:fade .25s linear}@keyframes fade{from{opa
 <main>
   <!-- ================= NIHSS (items 1-11) ================= -->
   <section id="nihss" class="active">
-    <div class="totals">NIHSS Total: <span id="nihssTotal">0</span></div>
+    <div class="totals">NIHSS Total: <span data-nihss-total>0</span0</span></div>
 <div class="actions"><button id="nihssResetTop">Reset</button></div>
 
     <!-- Loop of NIHSS items -->
@@ -188,7 +188,7 @@ section.active{display:block;animation:fade .25s linear}@keyframes fade{from{opa
       <input id="n2" name="neglect" value="2" type="radio"><label for="n2">2 Profound</label>
     </div></div>
 
-    <div class="totals">NIHSS Total: <span id="nihssTotal">0</span></div>
+    <div class="totals">NIHSS Total: <span data-nihss-total>0</span></div>
 	  
 <div class="actions">
   <button id="calcNIHSS">Calculate</button>
@@ -262,11 +262,18 @@ document.querySelectorAll('nav button').forEach(btn=>{
 });
 
 /* live totals */
-function calcNIHSS(){
-  let total=0;
-  document.querySelectorAll('#nihss input:checked').forEach(r=>total+=+r.value);
-  document.getElementById('nihssTotal').textContent=total;
+function calcNIHSS() {
+  let total = 0;
+  // Sum all checked NIHSS inputs
+  document.querySelectorAll('#nihss input:checked').forEach(radio => {
+    total += parseInt(radio.value, 10);
+  });
+  // Update all elements marked with data-nihss-total
+  document.querySelectorAll('[data-nihss-total]').forEach(el => {
+    el.textContent = total;
+  });
 }
+
 function calcMRS(){
   const sel=document.querySelector('#mrs input:checked');
   document.getElementById('mrsTotal').textContent=sel?sel.value:'–';
